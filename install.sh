@@ -9,7 +9,6 @@ TOOLS=(
     "httpx"
     "dnsx"
     "assetfinder"
-    "findomain"
     "httprobe"
     "gau"
     "waybackurls"
@@ -19,6 +18,11 @@ TOOLS=(
     "gf"
     "gospider"
     "paramspider"
+    "nuclei"
+    "arjun"
+    "dalfox"
+    "massdns"
+    "bbot"
 )
 
 INSTALL_DIR="/usr/local/bin"
@@ -43,6 +47,10 @@ install_tool() {
             go install github.com/d3mondev/puredns/v2@latest && mv ~/go/bin/puredns $INSTALL_DIR/
             ;;
         "httpx")
+            if check_tool "httpx"; then
+                echo "[!] Removing existing httpx installation..."
+                sudo rm -f "$(which httpx)"
+            fi
             go install github.com/projectdiscovery/httpx/cmd/httpx@latest && mv ~/go/bin/httpx $INSTALL_DIR/
             ;;
         "dnsx")
@@ -50,9 +58,6 @@ install_tool() {
             ;;
         "assetfinder")
             go install github.com/tomnomnom/assetfinder@latest && mv ~/go/bin/assetfinder $INSTALL_DIR/
-            ;;
-        "findomain")
-            echo "[!] Findomain does not have a Go installation method. Please install manually."
             ;;
         "httprobe")
             go install github.com/tomnomnom/httprobe@latest && mv ~/go/bin/httprobe $INSTALL_DIR/
@@ -81,6 +86,24 @@ install_tool() {
         "paramspider")
             sudo apt update && sudo apt install -y paramspider
             ;;
+        "nuclei")
+            go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest && mv ~/go/bin/nuclei $INSTALL_DIR/
+            ;;
+        "arjun")
+            sudo apt update && sudo apt install -y arjun
+            ;;
+        "dalfox")
+            go install github.com/hahwul/dalfox/v2@latest && mv ~/go/bin/dalfox $INSTALL_DIR/
+            ;;
+        "massdns")
+            echo "[+] Installing MassDNS..."
+            sudo apt install massdns 
+            ;;
+        "bbot")
+            echo "[+] Installing bbot using pipx..."
+            sudo apt update && sudo apt install -y pipx
+            pipx install bbot
+            ;;
         *)
             echo "[!] Unknown tool: $tool"
             ;;
@@ -101,5 +124,14 @@ for tool in "${TOOLS[@]}"; do
         echo "[✔] $tool is already installed."
     fi
 done
+
+# Install GF patterns
+if [ -d "$HOME/.gf" ]; then
+    echo "[✔] GF patterns directory found."
+else
+    echo "[+] Installing GF patterns..."
+    mkdir -p "$HOME/.gf"
+    git clone https://github.com/1ndianl33t/Gf-Patterns "$HOME/.gf"
+fi
 
 echo "[+] All tools installed successfully."

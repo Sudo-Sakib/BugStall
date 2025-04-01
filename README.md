@@ -1,18 +1,32 @@
-## Automated Recon Tool Installer 🛠️
+# Bug Bounty Tools Installer
 
-This script automates the installation of essential reconnaissance tools used for **bug bounty hunting** and **penetration testing**. It installs tools using `go install` or `apt` where applicable, ensuring they are up-to-date.
+## 📌 Overview
+This is an automated installation script designed for Kali Linux users to quickly set up essential bug bounty tools. Instead of manually installing tools after every fresh OS installation, this script saves time by automatically installing and configuring everything needed for bug bounty hunting.
 
-### 🔹 Tools Installed
-- **Subdomain Enumeration**: `subfinder`, `amass`, `assetfinder`, `findomain`
-- **DNS & HTTP Probing**: `puredns`, `dnsx`, `httpx`, `httprobe`
-- **Wayback Data & Crawling**: `gau`, `waybackurls`, `katana`, `hakrawler`, `gospider`
-- **Parameter & Fuzzing Tools**: `gf`, `paramspider`
-- **Utilities**: `anew`
+## 🚀 Features
+- Installs **40+ essential bug bounty tools** automatically
+- Ensures dependencies (Go, Python, pipx, snap) are installed
+- Checks if a tool is already installed before installing it
+- Updates tools to their latest versions
+- Installs missing `gf` patterns for enhanced pattern matching
+- Handles both apt and snap installations seamlessly
+- Creates necessary symlinks for Snap-installed tools
 
-### 🚀 Installation
+## 🛠️ Included Tools
+| Category           | Tools                                                                 |
+|--------------------|-----------------------------------------------------------------------|
+| Reconnaissance     | subfinder, amass, findomain, metabigor, uncover                      |
+| Scanning           | nmap, naabu, nuclei, ffuf, feroxbuster                               |
+| Web Analysis       | httpx, dalfox, arjun, paramspider, gospider                          |
+| DNS Tools          | dnsx, puredns, shuffledns, massdns, dnsgen                           |
+| Utility            | gf, anew, hakcheckurl, interactsh-client, waybackurls                |
+| Content Discovery  | katana, hakrawler, dirsearch, meg, gau                               |
+| Cloud Security     | subjack, subzy, trufflehog                                           |
+| Others             | wpscan, sqlmap, seclists, chromium, gowitness                        |
 
-#### 1️⃣ Clone the Repository
+## 🔧 Installation
+
+### Prerequisites
+Ensure you are using **Kali Linux** and have `git` installed:
 ```bash
-git clone https://github.com/Sudo-Sakib/Tool-Installer.git && cd Tool-Installer
-sudo chmod +x install.sh
-```
+sudo apt update && sudo apt install -y git

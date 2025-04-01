@@ -71,6 +71,10 @@ install_tool() {
     tool=$1
     echo "[+] Installing $tool..."
     case $tool in
+        "chromium")
+            sudo apt install -y chromium
+            sudo apt install -y chromium-driver
+            ;;
         "subfinder")
             go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
             sudo mv "$USER_HOME/go/bin/subfinder" "$INSTALL_DIR/"
@@ -232,10 +236,6 @@ install_tool() {
             ;;
         "naabu")
             sudo apt install -y naabu
-            ;;
-        "chromium")
-            sudo apt install -y chromium
-            sudo apt install -y chromium-driver
             ;;
         "mantra")
             go install github.com/Brosck/mantra@latest

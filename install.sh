@@ -40,11 +40,9 @@ TOOLS=(
     "interactsh-client" # OOB interaction client
     "metabigor"       # OSINT intelligence tool
     "shuffledns"      # MassDNS wrapper
-    "gowitness"       # Screenshot tool
     "trufflehog"      # Secrets scanning
     "subjack"         # Subdomain takeover detection
     "naabu"           # Port scanning
-    "chromium"        # Browser for gowitness
     "dnsgen"          # Generate DNS permutations
     "mantra"          # Web application pentesting framework
     "subjs"           # Subdomain enumeration tool
@@ -71,10 +69,6 @@ install_tool() {
     tool=$1
     echo "[+] Installing $tool..."
     case $tool in
-        "chromium")
-            sudo apt install -y chromium
-            sudo apt install -y chromium-driver
-            ;;
         "subfinder")
             go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
             sudo mv "$USER_HOME/go/bin/subfinder" "$INSTALL_DIR/"
@@ -221,11 +215,6 @@ install_tool() {
         "shuffledns")
             go install github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
             sudo mv "$USER_HOME/go/bin/shuffledns" "$INSTALL_DIR/"
-            ;;
-        "gowitness")
-            go install github.com/sensepost/gowitness@latest
-            sudo mv "$USER_HOME/go/bin/gowitness" "$INSTALL_DIR/"
-            sudo apt-get install -y chromium-browser
             ;;
         "trufflehog")
             sudo apt install -y trufflehog
